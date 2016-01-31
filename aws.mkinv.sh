@@ -9,8 +9,8 @@ SSHuid='ansible_ssh_user=ubuntu'
 MASTER=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,PrivateIpAddress]' \
    --filter "Name=tag:Name,Values=AWSCLI v1.2 master" --output text | tr '\t' ' ')
 
-WORKERS=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,PrivateIpAddress]' --filter "Name=tag:Project,V
-alues=HP-DEMO" "Name=instance-state-name,Values=running" --output text | tr '\t' ' ')
+WORKERS=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,PrivateIpAddress]' \
+--filter "Name=tag:Project,Values=HP-DEMO" "Name=instance-state-name,Values=running" --output text | tr '\t' ' ')
 
 echo '[Master]' > $INVfile
  while IFS=' ' read instanceID PrivIpAddr; do
